@@ -25,20 +25,14 @@ void Boids::setPosition(glm::vec2 newPos, p6::Context ctx)
 
 void Boids::setDirection(glm::vec2 newDir)
 {
-    if (glm::distance(glm::vec2(0.f, 0.f), newDir) > m_speed || glm::distance(glm::vec2(0.f, 0.f), newDir) < m_speed - .25)
-    {
-        m_angle     = glm::atan<float>(newDir.x, newDir.y);
-        m_direction = glm::vec2(m_speed * glm::cos(m_angle), m_speed * glm::sin(m_angle));
-    }
-    else
-    {
-        m_direction = newDir;
-    }
+    m_angle     = glm::atan<float>(newDir.x, newDir.y);
+    m_direction = m_speed * glm::normalize(newDir);
+    std::cout << glm::distance(glm::vec2(0.f, 0.f), newDir) << std::endl;
 }
 
 void Boids::useForce(glm::vec2 extForce, float screen)
 {
-    const glm::vec2 newForce = extForce * .0005f;
+    const glm::vec2 newForce = extForce * .0004f;
     setDirection(getDirection() + newForce);
     if (getPosition().x + getDirection().x > screen || getPosition().x + getDirection().x < -screen)
     {

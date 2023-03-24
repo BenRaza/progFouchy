@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
     // Actual app
     // auto ctx = p6::Context{{.title = "Simple-p6-Setup"}};
     ctx.maximize_window();
-    float        speed           = 0.007;
+    float        speed           = 0.003;
     unsigned int NUMBER_OF_BOIDS = 50;
 
     std::vector<Boids> boids;
